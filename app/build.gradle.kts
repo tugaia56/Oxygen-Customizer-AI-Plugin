@@ -14,7 +14,7 @@ android {
         applicationId = "it.dhd.oxygencustomizer.aiplugin"
         minSdk = 31
         targetSdk = 34
-        versionCode = 2
+        versionCode = 3
         versionName = "1.0.3"
         setProperty("archivesBaseName", "OxygenCustomizerAIPlugin.apk")
     }
@@ -58,6 +58,16 @@ android {
         getByName("debug") {
             versionNameSuffix = ".debug"
         }
+    }
+    applicationVariants.all {
+        val variant = this
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                val outputFileName = "OxygenCustomizerAIPlugin.apk"
+                println("OutputFileName: $outputFileName")
+                output.outputFileName = outputFileName
+            }
     }
     buildFeatures{
         buildConfig = true
