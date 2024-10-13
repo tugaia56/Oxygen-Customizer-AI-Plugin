@@ -55,7 +55,6 @@ jobs:
           prerelease: false
           draft: false
           artifacts: 'app/build/outputs/apk/release/*.apk'
-          bodyFile: 'releaseNotes.md'
 
       - name: Commit version bump
         uses: github-actions-x/commit@v2.9
