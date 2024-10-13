@@ -14,13 +14,5 @@ sed -i 's/"apkUrl":.*/"apkUrl": "https:\/\/github.com\/DHD2280\/Oxygen-Customize
 echo "**$NEWVERNAME**  " > newChangeLog.md
 cat changeLog.md >> newChangeLog.md
 echo "  " >> newChangeLog.md
-cat BetaChangelog.md >> newChangeLog.md
-mv  newChangeLog.md BetaChangelog.md
-
-echo "*$NEWVERNAME* released in beta channel  " > telegram.msg
-echo "  " >> telegram.msg
-echo "*Changelog:*  " >> telegram.msg
-cat changeLog.md >> telegram.msg
-echo 'TMessage<<EOF' >> $GITHUB_ENV
-cat telegram.msg >> $GITHUB_ENV
-echo 'EOF' >> $GITHUB_ENV
+cat Changelog.md >> newChangeLog.md
+mv  newChangeLog.md Changelog.md
