@@ -24,4 +24,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Oxygen Customizer - AI Plugin"
 include(":app")
- 

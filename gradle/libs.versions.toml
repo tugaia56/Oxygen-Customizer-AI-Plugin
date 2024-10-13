@@ -2,12 +2,14 @@
 agp = "8.6.0"
 kotlin = "2.0.21"
 coreKtx = "1.13.1"
+removeBgVersion = "1.0.4"
+suVersion = "6.0.0"
 
 [libraries]
-removebg = { module = "com.github.erenalpaslan:removebg", version = "1.0.4" }
-su-core = { module = "com.github.topjohnwu.libsu:core", version = "6.0.0" }
-su-nio = { module = "com.github.topjohnwu.libsu:nio", version = "6.0.0" }
-su-service = { module = "com.github.topjohnwu.libsu:service", version = "6.0.0" }
+removebg = { module = "com.github.erenalpaslan:removebg", version.ref = "removeBgVersion" }
+su-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "suVersion" }
+su-nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "suVersion" }
+su-service = { module = "com.github.topjohnwu.libsu:service", version.ref = "suVersion" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 [plugins]
