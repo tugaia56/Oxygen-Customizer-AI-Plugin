@@ -4,16 +4,19 @@
       {
         "name": "U2Net",
         "type": "onnx",
+        "filename": "u2net.onnx",
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.onnx"
       },
       {
         "name": "isnet-anime",
         "type": "onnx",
+        "filename": "isnet_anime.onnx",
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/isnet_anime.onnx"
       },
       {
         "name": "U2Net",
         "type": "pytorch",
+        "filename": "u2net.ptl",
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.ptl"
       }
     ]
