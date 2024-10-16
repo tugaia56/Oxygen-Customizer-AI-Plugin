@@ -9,6 +9,13 @@
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.onnx"
       },
       {
+        "name": "U2Net Human Segmentation",
+        "description": "U2Net model for human segmentation.",
+        "type": "onnx",
+        "filename": "u2net_human_seg.onnx",
+        "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.onnx"
+      },
+      {
         "name": "U2Netp",
         "description": "U2Net but with a smaller model size and faster inference speed.",
         "type": "onnx",
