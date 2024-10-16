@@ -3,12 +3,21 @@
     "model": [
       {
         "name": "U2Net",
+        "description": "U2Net is a deep learning model that can be used for image segmentation. It is based on the U-Net architecture and is designed to segment objects from the background in images.",
         "type": "onnx",
         "filename": "u2net.onnx",
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.onnx"
       },
       {
+        "name": "U2Netp",
+        "description": "U2Net but with a smaller model size and faster inference speed.",
+        "type": "onnx",
+        "filename": "u2netp.onnx",
+        "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2netp.onnx"
+      },
+      {
         "name": "isnet-anime",
+        "description": "A high-accuracy segmentation for anime character.",
         "type": "onnx",
         "filename": "isnet_anime.onnx",
         "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/isnet_anime.onnx"
