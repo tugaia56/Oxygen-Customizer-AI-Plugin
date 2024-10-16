@@ -13,7 +13,7 @@
         "description": "U2Net model for human segmentation.",
         "type": "onnx",
         "filename": "u2net_human_seg.onnx",
-        "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net.onnx"
+        "url": "https://github.com/DHD2280/Oxygen-Customizer-AI-Plugin/releases/download/models/u2net_human_seg.onnx"
       },
       {
         "name": "U2Netp",
