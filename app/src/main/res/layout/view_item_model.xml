@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<it.dhd.oxygencustomizer.aiplugin.cardlist.CardListSelectedItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/preference_card_margin_horizontal"
+    android:layout_marginTop="4dp"
+    android:background="@drawable/preference_background_center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="12dp"
+        android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/model_name"
+                style="@style/PreferenceTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="model name"
+                android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/model_description"
+            style="@style/PreferenceSummaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:text="model desc"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/model_download"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/download" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/model_progress"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+</it.dhd.oxygencustomizer.aiplugin.cardlist.CardListSelectedItemLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory
+        android:key="pref_category_general"
+        app:iconSpaceReserved="false">
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusMenuPreference
+            android:key="ai_mode"
+            android:title="@string/ai_mode"
+            android:entries="@array/ai_mode_entries"
+            android:entryValues="@array/ai_mode_values"
+            android:defaultValue="0"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true"/>
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusListPreference
+            android:key="ai_model"
+            android:title="@string/ai_model"
+            android:entries="@array/ai_model_entries"
+            android:entryValues="@array/ai_model_values"
+            android:defaultValue="0"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true"/>
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusJumpPreference
+            android:key="module_downloader"
+            android:title="@string/download_models"
+            app:iconSpaceReserved="false" />
+
+    </it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory>
+
+    <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory
+        android:title="@string/test_category"
+        android:key="misc">
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusJumpPreference
+            android:key="test"
+            android:title="@string/test_ai_model"
+            app:iconSpaceReserved="false" />
+
+    </it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory>
+
+    <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory
+        android:title="@string/about"
+        android:key="about">
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreference
+            android:key="app_version"
+            android:title="V1.0.4"
+            app:iconSpaceReserved="false" />
+
+        <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusJumpPreference
+            android:key="check_updates"
+            android:title="Check Updates"
+            app:iconSpaceReserved="false" />
+
+    </it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreferenceCategory>
+
+</PreferenceScreen>

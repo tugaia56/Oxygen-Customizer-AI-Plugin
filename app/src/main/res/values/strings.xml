@@ -1,3 +1,16 @@
 <resources>
+
     <string name="app_name">Oxygen Customizer - AI Plugin</string>
+    <string name="ai_mode">AI Mode</string>
+    <string name="ai_mode_pytorch">PyTorch</string>
+    <string name="ai_mode_onnx">ONNX</string>
+    <string name="ai_model">AI Model</string>
+    <string name="download_models">Download Models</string>
+    <string name="download">Download</string>
+    <string name="update_channel_name">Update Channel</string>
+    <string name="update_channel_description">Notify updates</string>
+    <string name="test_category">Test</string>
+    <string name="test_ai_model">Test AI Model</string>
+    <string name="about">About</string>
+
 </resources>

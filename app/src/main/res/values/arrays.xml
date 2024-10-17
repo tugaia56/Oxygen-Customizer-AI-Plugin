@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ai_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="ai_mode_entries" translatable="false">
+        <item>@string/ai_mode_pytorch</item>
+        <item>@string/ai_mode_onnx</item>
+    </string-array>
+
+    <string-array name="ai_model_entries" translatable="false">
+        <item>U2Net</item>
+        <item>U2Net Human Segmentation</item>
+        <item>U2Netp</item>
+        <item>Isnet-anime</item>
+    </string-array>
+    <string-array name="ai_model_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+</resources>

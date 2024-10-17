@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="preferenceBackgroundColor" format="reference|color" />
+    <attr name="preferenceBackgroundColorPressed" format="reference|color" />
+
+    <declare-styleable name="OplusPreference">
+        <attr name="clickStyle" format="integer"/>
+        <attr name="forcePosition" format="string"/>
+        <attr name="tintTitle" format="boolean"/>
+        <attr name="centerTitle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="OplusListPreference">
+        <attr name="forcePosition" />
+    </declare-styleable>
+
+</resources>
