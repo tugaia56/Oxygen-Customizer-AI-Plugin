@@ -19,6 +19,12 @@
     public static ** requireNonNull(...);
 }
 
+# Strip debug log
+-assumenosideeffects class android.util.Log {
+    public static int v(...);
+    public static int d(...);
+}
+
 # org.pytorch.PyTorchAndroid
 -keepnames class org.pytorch.**
 -keep class org.pytorch.** { *; }
