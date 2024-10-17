@@ -16,18 +16,14 @@ This plugin uses the [removebg](https://github.com/AppcentMobile/removebg) libra
 
 # 🚀 Usage
 
-Use permission 
-```xml
-<uses-permission android:name="it.dhd.oxygencustomizer.aiplugin.REQUEST_EXTRACT_SUBJECT" />
-```
-in your app.
-
 Send a broadcast with the image source path and the destination path to save the extracted image.
+Remember to add a package name, so the app will send an intent on success or failure.
 
 ```java
 Intent intent = new Intent("it.dhd.oxygencustomizer.aiplugin.REQUEST_EXTRACT_SUBJECT");
 intent.putExtra("sourcePath", "/path/to/image.png");
 intent.putExtra("destinationPath", "/path/to/save/extracted/image.png");
+intent.setPackage("your.package.name");
 sendBroadcast(intent);
 ```
 
