@@ -1,42 +1,34 @@
 package it.dhd.oxygencustomizer.aiplugin.receivers;
 
+import static android.os.FileUtils.copy;
 import static it.dhd.oxygencustomizer.aiplugin.utils.Constants.ACTION_EXTRACT_FAILURE;
-import static it.dhd.oxygencustomizer.aiplugin.utils.Constants.ACTION_EXTRACT_SUBJECT;
+import static it.dhd.oxygencustomizer.aiplugin.utils.Constants.ACTION_EXTRACT_SUCCESS;
+import static it.dhd.oxygencustomizer.aiplugin.utils.ImageUtils.fixImageOrientation;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.topjohnwu.superuser.Shell;
-import com.topjohnwu.superuser.ipc.RootService;
-import com.topjohnwu.superuser.nio.ExtendedFile;
-import com.topjohnwu.superuser.nio.FileSystemManager;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import it.dhd.oxygencustomizer.aiplugin.BuildConfig;
-import it.dhd.oxygencustomizer.aiplugin.IRootProviderService;
-import it.dhd.oxygencustomizer.aiplugin.services.RootProvider;
+import it.dhd.oxygencustomizer.aiplugin.interfaces.SegmenterResultListener;
 import it.dhd.oxygencustomizer.aiplugin.utils.BitmapSubjectSegmenter;
+import it.dhd.oxygencustomizer.aiplugin.utils.SubjectSegmenter;
 
 public class SubjectExtractionReceiver extends BroadcastReceiver {
-
-    private ServiceConnection mCoreRootServiceConnection;
-    private IRootProviderService mRootServiceIPC = null;
 
     private String mSourcePath = null;
     private String mDestinationPath = null;
@@ -44,7 +36,6 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!intent.getAction().equals(ACTION_EXTRACT_SUBJECT)) return;
 
         Log.d("SubjectExtractionReceiver", "Received intent");
 
@@ -52,78 +43,45 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
         mDestinationPath = intent.getStringExtra("destinationPath");
         mSenderPackage = intent.getPackage();
 
+        Log.d("SubjectExtractionReceiver", "mSenderPackage: " + mSenderPackage);
+
         if (mSourcePath == null || mDestinationPath == null) {
-            Intent failureIntent = new Intent();
-            failureIntent.setAction(ACTION_EXTRACT_FAILURE);
-            failureIntent.setPackage(mSenderPackage);
-            Log.d("SubjectExtractionReceiver", "Invalid source or destination path");
-            failureIntent.putExtra("error", "Invalid source or destination path");
-            context.sendBroadcast(failureIntent);
+            sendError(context, "Invalid source or destination path");
             return;
         }
 
-        startRootService(context);
+        startRemove(context);
 
     }
 
+    private void startRemove(Context context) {
 
-    private void startRootService(Context context) {
-        // Start RootService connection
-        Intent intent = new Intent(context, RootProvider.class);
-        mCoreRootServiceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                mRootServiceIPC = IRootProviderService.Stub.asInterface(service);
-                try {
-                    onRootServiceStarted(context);
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        File file = new File(mSourcePath);
 
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                mRootServiceIPC = null;
-            }
-        };
-        RootService.bind(intent, mCoreRootServiceConnection);
-    }
-
-    private void onRootServiceStarted(Context context) throws RemoteException {
-        Log.d("SubjectExtractionReceiver", "RootService started");
-
-        FileSystemManager remoteFS = null;
         try {
-            remoteFS = FileSystemManager.getRemote(mRootServiceIPC.getFileSystemService());
-        } catch (RemoteException e) {
-            // Handle errors
-        }
-        ExtendedFile sourceFile = remoteFS.getFile(mSourcePath);
-        if (!sourceFile.exists()) {
-            Intent failureIntent = new Intent();
-            failureIntent.setAction(ACTION_EXTRACT_FAILURE);
-            failureIntent.setPackage(mSenderPackage);
-            Log.d("SubjectExtractionReceiver", "Source file does not exist!");
-            failureIntent.putExtra("error", "Source file does not exist!");
-            context.sendBroadcast(failureIntent);
-            return;
-        }
-
-
-        InputStream inputStream = null;
-        try {
-            inputStream = sourceFile.newInputStream();
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-            if (bitmap != null) {
-                new BitmapSubjectSegmenter(context).segmentSubjectFromJava(bitmap, new BitmapSubjectSegmenter.SegmentResultListener() {
+            FileInputStream fis = new FileInputStream(file);
+            Bitmap bitmap = fixImageOrientation(fis);
+            if (bitmap == null) {
+                sendError(context, "Failed to decode bitmap");
+                return;
+            }
+            Bitmap inputBitmap = bitmap.copy(bitmap.getConfig(), true);
+            int aiMode = Integer.parseInt(prefs.getString("ai_mode", "0"));
+            Log.d("SubjectExtractionReceiver", "AI Mode: " + aiMode);
+            if (aiMode == 1) {
+                Log.d("SubjectExtractionReceiver", "Using SubjectSegmenter " + Integer.parseInt(prefs.getString("ai_model", "0")));
+                new SubjectSegmenter(context, Integer.parseInt(prefs.getString("ai_model", "0")), new SegmenterResultListener() {
                     @Override
-                    public void onSuccess(@Nullable Bitmap result) {
-                        Shell.cmd("rm -rf " + mDestinationPath).exec();
+                    public void onSegmentationResult(Bitmap result) {
                         try {
+                            if (result.isRecycled()) {
+                                Log.e("SubjectExtractionReceiver", "onSuccess: BitmapSubjectSegmenter: Recycled bitmap");
+                                return;
+                            }
                             File tempFile = File.createTempFile("lswt", ".png");
 
-                            Log.d("SubjectExtractionReceiver","extractSubject: " + tempFile.getAbsolutePath() + " -> " + mDestinationPath);
+                            Log.d("SubjectExtractionReceiver", "extractSubject: " + tempFile.getAbsolutePath() + " -> " + mDestinationPath);
 
                             FileOutputStream outputStream = new FileOutputStream(tempFile);
                             result.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
@@ -131,12 +89,16 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
                             outputStream.close();
                             result.recycle();
 
-                            Shell.cmd("cp -F " + tempFile.getAbsolutePath() + " " + mDestinationPath).exec();
-                            Shell.cmd("chmod 644 " + mDestinationPath).exec();
+                            try {
+                                copy(new FileInputStream(tempFile), new FileOutputStream(mDestinationPath));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                             Log.d("SubjectExtractionReceiver", "onSuccess: BitmapSubjectSegmenter " + mDestinationPath);
 
                             Intent successIntent = new Intent();
-                            successIntent.setAction(ACTION_EXTRACT_SUBJECT);
+                            successIntent.setAction(ACTION_EXTRACT_SUCCESS);
                             successIntent.setPackage(mSenderPackage);
                             context.sendBroadcast(successIntent);
                         } catch (Throwable t) {
@@ -145,7 +107,42 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
                     }
 
                     @Override
-                    public void onFail(@NonNull Exception e) {
+                    public void onSegmentationError(Exception e) {
+                        sendError(context, e.getMessage());
+                    }
+                }).removeBackground(inputBitmap);
+            } else {
+                new BitmapSubjectSegmenter(context).segmentSubjectFromJava(inputBitmap, new SegmenterResultListener() {
+                    @Override
+                    public void onSegmentationResult(@Nullable Bitmap result) {
+                        try {
+                            File tempFile = File.createTempFile("lswt", ".png");
+
+                            Log.d("SubjectExtractionReceiver", "extractSubject: " + tempFile.getAbsolutePath() + " -> " + mDestinationPath);
+
+                            FileOutputStream outputStream = new FileOutputStream(tempFile);
+                            result.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+                            outputStream.close();
+                            result.recycle();
+
+                            try {
+                                copy(new FileInputStream(tempFile), new FileOutputStream(mDestinationPath));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            Intent successIntent = new Intent();
+                            successIntent.setAction(ACTION_EXTRACT_SUCCESS);
+                            successIntent.setPackage(mSenderPackage);
+                            context.sendBroadcast(successIntent);
+                        } catch (Throwable t) {
+                            Log.e("SubjectExtractionReceiver", "onSuccess: BitmapSubjectSegmenter", t);
+                        }
+                    }
+
+                    @Override
+                    public void onSegmentationError(@NonNull Exception e) {
                         Intent failureIntent = new Intent();
                         failureIntent.setAction(ACTION_EXTRACT_FAILURE);
                         failureIntent.setPackage(mSenderPackage);
@@ -154,20 +151,19 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
                         context.sendBroadcast(failureIntent);
                     }
                 });
-            } else {
-                Log.d("SubjectExtractionReceiver", "Failed to decode bitmap");
             }
         } catch (Exception e) {
             Log.e("SubjectExtractionReceiver", "Failed to decode bitmap", e);
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+    }
+
+    private void sendError(Context context, String errorMessage) {
+        Intent failureIntent = new Intent();
+        failureIntent.setAction(ACTION_EXTRACT_FAILURE);
+        failureIntent.setPackage(mSenderPackage);
+        Log.d("SubjectExtractionReceiver", errorMessage);
+        failureIntent.putExtra("error", errorMessage);
+        context.sendBroadcast(failureIntent);
     }
 
 }
