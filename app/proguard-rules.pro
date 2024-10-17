@@ -19,14 +19,13 @@
     public static ** requireNonNull(...);
 }
 
-# Root Service
--keep class it.dhd.oxygencustomizer.aiplugin.services.* { *; }
--keep class it.dhd.oxygencustomizer.aiplugin.IRootProviderService { *; }
-
 # org.pytorch.PyTorchAndroid
 -keepnames class org.pytorch.**
 -keep class org.pytorch.** { *; }
 -keep class com.facebook.jni.* { *; }
+
+# ONNX Runtime
+-keep class ai.onnxruntime.** { *; }
 
 -printusage release/usage.txt
 -printmapping release/mapping.txt
