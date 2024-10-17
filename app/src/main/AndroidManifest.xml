@@ -12,7 +12,7 @@
     <application
         android:name=".OxygenCustomizerAIPlugin"
         android:allowBackup="true"
-        android:theme="@style/Theme.OxygenCustomizer"
+        android:theme="@style/Theme.OxygenCustomizer.AIPlugin"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"

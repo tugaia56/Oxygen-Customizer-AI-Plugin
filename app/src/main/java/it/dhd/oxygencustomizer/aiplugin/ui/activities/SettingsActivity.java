@@ -1,6 +1,8 @@
 package it.dhd.oxygencustomizer.aiplugin.ui.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
@@ -25,6 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setDarkTheme();
         DynamicColors.applyToActivityIfAvailable(this);
         fragmentManager = getSupportFragmentManager();
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -37,6 +40,27 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.app_name);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    private void setDarkTheme() {
+        if (isNightMode()) {
+            int darkStyle = Settings.System.getInt(getContentResolver(), "DarkMode_style_key", 2);
+            switch (darkStyle) {
+                case 0:
+                    setTheme(R.style.Theme_OxygenCustomizer_AIPlugin_DarkHard);
+                    break;
+                case 1:
+                    setTheme(R.style.Theme_OxygenCustomizer_AIPlugin_DarkMedium);
+                    break;
+                case 2:
+                    setTheme(R.style.Theme_OxygenCustomizer_AIPlugin_DarkSoft);
+                    break;
+            }
+        }
+    }
+
+    private boolean isNightMode() {
+        return (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
     @Override

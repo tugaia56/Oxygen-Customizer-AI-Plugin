@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.OxygenCustomizer" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.OxygenCustomizer.AIPlugin" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_dark_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
@@ -48,21 +48,21 @@
         <item name="popupMenuBackground">@drawable/custom_popup_background</item>
     </style>
 
-    <style name="Theme.OxygenCustomizer.DarkSoft" parent="Theme.OxygenCustomizer">
+    <style name="Theme.OxygenCustomizer.AIPlugin.DarkSoft" parent="Theme.OxygenCustomizer.AIPlugin">
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundSoft</item>
         <item name="android:colorBackground">@color/colorBackgroundSoft</item>
         <item name="preferenceBackgroundColor">#454545</item>
     </style>
 
-    <style name="Theme.OxygenCustomizer.DarkMedium" parent="Theme.OxygenCustomizer">
+    <style name="Theme.OxygenCustomizer.AIPlugin.DarkMedium" parent="Theme.OxygenCustomizer.AIPlugin">
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundMedium</item>
         <item name="android:colorBackground">@color/colorBackgroundMedium</item>
         <item name="preferenceBackgroundColor">#2F2F2F</item>
     </style>
 
-    <style name="Theme.OxygenCustomizer.DarkHard" parent="Theme.OxygenCustomizer">
+    <style name="Theme.OxygenCustomizer.AIPlugin.DarkHard" parent="Theme.OxygenCustomizer.AIPlugin">
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundHard</item>
         <item name="android:colorBackground">@color/colorBackgroundHard</item>
