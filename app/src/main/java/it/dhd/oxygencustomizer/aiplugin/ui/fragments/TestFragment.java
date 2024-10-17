@@ -97,8 +97,7 @@ public class TestFragment extends Fragment {
         int aiMode = Integer.parseInt(mPrefs.getString("ai_mode", "0"));
         if (aiMode == 1) {
             try {
-                new SubjectSegmenter(requireContext(), Integer.parseInt(mPrefs.getString("ai_model", "0")), listener)
-                        .remove(mBitmap);
+                new SubjectSegmenter(requireContext(), Integer.parseInt(mPrefs.getString("ai_model", "0")), listener).removeBackground(mBitmap);
             } catch (Exception e) {
                 listener.onSegmentationError(e);
             }
