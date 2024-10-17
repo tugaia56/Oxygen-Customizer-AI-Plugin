@@ -39,11 +39,18 @@ NOTE: The generated subject is always compressed as [PNG](./app/src/main/java/it
 
 ### Thanks to:
 
+- Microsoft for [ONNX Runtime](https://github.com/microsoft/onnxruntime)
+- [danielgatis](https://github.com/danielgatis/) for his [rembg](https://github.com/danielgatis/rembg)
 - [erenalpaslan](https://github.com/erenalpaslan) for his [work](https://github.com/AppcentMobile/removebg).
 
 # © License
 
 This project is licensed under GPLv3. Please see [`LICENSE`](./LICENSE.md) for the full license text.
 Portions of this project include code licensed under the MIT License:
+
 - [removebg](https://github.com/AppcentMobile/removebg)
 - Copyright (c) [2023] [Eren Alpaslan]
+
+- [rembg](https://github.com/danielgatis/rembg)
+- Copyright (c) [2020] Daniel Gatis
+```
