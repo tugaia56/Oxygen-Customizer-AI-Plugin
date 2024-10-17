@@ -53,6 +53,7 @@ jobs:
           tag: ${{ github.ref }}
           name: ${{ github.ref_name }}
           prerelease: false
+          makeLatest: true
           draft: false
           artifacts: 'app/build/outputs/apk/release/*.apk'
 
