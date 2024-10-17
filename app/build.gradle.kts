@@ -72,6 +72,7 @@ android {
     buildFeatures{
         buildConfig = true
         aidl = true
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -87,9 +88,16 @@ android {
 
 dependencies {
 
-    implementation(libs.removebg)
     implementation(libs.su.core)
     implementation(libs.su.nio)
     implementation(libs.su.service)
     implementation(libs.core.ktx)
+    implementation(libs.pytorch.android.lite)
+    implementation(libs.pytorch.android.torchvision.lite)
+    implementation(libs.material)
+    implementation(libs.androidx.preference)
+    implementation(libs.prdownloader)
+    implementation(libs.onnxruntime)
+    implementation(libs.androidx.exifinterface)
+
 }
