@@ -46,6 +46,8 @@
         <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
         <item name="materialAlertDialogTheme">@style/AppTheme.Dialog</item>
         <item name="popupMenuBackground">@drawable/custom_popup_background</item>
+        <!-- Toolbar -->
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 
     <style name="Theme.OxygenCustomizer.AIPlugin.DarkSoft" parent="Theme.OxygenCustomizer.AIPlugin">
