@@ -16,6 +16,7 @@ import com.google.android.material.color.DynamicColors;
 import it.dhd.oxygencustomizer.aiplugin.R;
 import it.dhd.oxygencustomizer.aiplugin.databinding.ActivityMainBinding;
 import it.dhd.oxygencustomizer.aiplugin.ui.fragments.SettingsFragment;
+import it.dhd.oxygencustomizer.aiplugin.utils.AppUtils;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -34,6 +35,10 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
         replaceFragment(new SettingsFragment(), false);
+
+        if (!AppUtils.hasStoragePermission()) {
+            AppUtils.requestStoragePermission(this);
+        }
 
         setSupportActionBar(mBinding.toolbar);
         actionBar = getSupportActionBar();
