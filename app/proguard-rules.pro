@@ -22,7 +22,6 @@
 # Strip debug log
 -assumenosideeffects class android.util.Log {
     public static int v(...);
-    public static int d(...);
 }
 
 # org.pytorch.PyTorchAndroid
