@@ -1,3 +1,6 @@
+**2.1.0**  
+- Request file permissions on startup  
+  
 **2.0.1**  
   
 **2.0.0**  
