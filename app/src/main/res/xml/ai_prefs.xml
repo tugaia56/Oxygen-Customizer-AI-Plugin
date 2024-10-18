@@ -48,7 +48,6 @@
 
         <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreference
             android:key="app_version"
-            android:title="V1.0.4"
             app:iconSpaceReserved="false" />
 
         <it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusJumpPreference
