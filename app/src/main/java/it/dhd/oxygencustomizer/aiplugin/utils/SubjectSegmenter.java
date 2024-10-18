@@ -24,7 +24,7 @@ public class SubjectSegmenter {
 
 
     public SubjectSegmenter(Context context, int sessionId, SegmenterResultListener listener) throws IOException, OrtException {
-        Log.d("SubjectSegmenter", "Initializing SubjectSegmenter");
+        Log.v("SubjectSegmenter", "Initializing SubjectSegmenter");
         this.mContext = context;
         this.mSessionId = sessionId;
         this.mListener = listener;
@@ -33,16 +33,16 @@ public class SubjectSegmenter {
 
     public Bitmap remove(Bitmap image) throws OrtException {
 
-        Log.d("SubjectSegmenter", "start predict");
+        Log.v("SubjectSegmenter", "start predict");
         Bitmap mask = mSession.predict(image);
-        Log.d("SubjectSegmenter", "end predict");
+        Log.v("SubjectSegmenter", "end predict");
 
         Bitmap cutout;
-        Log.d("SubjectSegmenter", "start naiveCutout");
+        Log.v("SubjectSegmenter", "start naiveCutout");
         cutout = naiveCutout(image, mask);
-        Log.d("SubjectSegmenter", "end naiveCutout");
+        Log.v("SubjectSegmenter", "end naiveCutout");
         mSession.close();
-        Log.d("SubjectSegmenter", "Returning result");
+        Log.v("SubjectSegmenter", "Returning result");
         return cutout;
     }
 

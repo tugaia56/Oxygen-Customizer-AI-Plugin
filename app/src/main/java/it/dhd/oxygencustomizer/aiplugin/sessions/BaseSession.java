@@ -45,7 +45,7 @@ public abstract class BaseSession {
         }
         OrtSession.SessionOptions options = new OrtSession.SessionOptions();
         int numThreads = Runtime.getRuntime().availableProcessors();
-        Log.d("BaseSession", "Number of threads: " + numThreads);
+        Log.v("BaseSession", "Number of threads: " + numThreads);
         options.setInterOpNumThreads(numThreads);
         options.setIntraOpNumThreads(numThreads);
 

@@ -161,7 +161,7 @@ public class SubjectExtractionReceiver extends BroadcastReceiver {
         Intent failureIntent = new Intent();
         failureIntent.setAction(ACTION_EXTRACT_FAILURE);
         failureIntent.setPackage(mSenderPackage);
-        Log.d("SubjectExtractionReceiver", errorMessage);
+        Log.e("SubjectExtractionReceiver", errorMessage);
         failureIntent.putExtra("error", errorMessage);
         context.sendBroadcast(failureIntent);
     }
