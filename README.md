@@ -12,7 +12,8 @@ You can always use this plugin in your app, look at the [Usage](#-usage) section
 
 # 🤖 How it works
 
-This plugin uses the [removebg](https://github.com/AppcentMobile/removebg) library to remove the background from an image.
+This plugin uses some code from [removebg](https://github.com/AppcentMobile/removebg) library to remove the background from an image using pytorch.
+This plugin also uses ONNX Runtime to run AI Models on Android.
 
 # 🚀 Usage
 
@@ -43,7 +44,7 @@ NOTE: The generated subject is always compressed as [PNG](./app/src/main/java/it
 - [danielgatis](https://github.com/danielgatis/) for his [rembg](https://github.com/danielgatis/rembg)
 - [erenalpaslan](https://github.com/erenalpaslan) for his [work](https://github.com/AppcentMobile/removebg).
 
-# © License
+# 📝 License
 
 This project is licensed under GPLv3. Please see [`LICENSE`](./LICENSE.md) for the full license text.
 Portions of this project include code licensed under the MIT License:
