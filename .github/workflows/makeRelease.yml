@@ -22,6 +22,9 @@ jobs:
       - name: Shell Scripts Permissions
         run: chmod +x .github/*.sh
 
+      - name: Changelog Generation
+        run: .github/extractChanges.sh
+
       - name: Version Bump
         run: .github/bumpVersion.sh
 
@@ -55,6 +58,7 @@ jobs:
           prerelease: false
           makeLatest: true
           draft: false
+          body: ${{ env.RMessage }}
           artifacts: 'app/build/outputs/apk/release/*.apk'
 
       - name: Commit version bump

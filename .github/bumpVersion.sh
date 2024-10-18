@@ -16,3 +16,12 @@ cat changeLog.md >> newChangeLog.md
 echo "  " >> newChangeLog.md
 cat Changelog.md >> newChangeLog.md
 mv  newChangeLog.md Changelog.md
+
+# release message
+echo "**$NEWVERNAME**  " > release.msg
+echo "  " >> release.msg
+echo "*Changelog:*  " >> release.msg
+cat changeLog.md >> release.msg
+echo 'RMessage<<EOF' >> $GITHUB_ENV
+cat release.msg >> $GITHUB_ENV
+echo 'EOF' >> $GITHUB_ENV
