@@ -36,6 +36,7 @@ import it.dhd.oxygencustomizer.aiplugin.ui.activities.SettingsActivity;
 import it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusJumpPreference;
 import it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusListPreference;
 import it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusMenuPreference;
+import it.dhd.oxygencustomizer.aiplugin.ui.preferences.OplusPreference;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -92,6 +93,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             ((SettingsActivity) requireActivity()).replaceFragment(new TestFragment());
             return true;
         });
+
+        OplusPreference mVersionPref = findPreference("app_version");
+        mVersionPref.setTitle(BuildConfig.VERSION_NAME);
 
         mUpdateChecker = findPreference("check_updates");
         Handler handler = new Handler(Looper.getMainLooper());
