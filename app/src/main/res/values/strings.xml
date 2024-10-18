@@ -5,6 +5,7 @@
     <string name="ai_mode_pytorch">PyTorch</string>
     <string name="ai_mode_onnx">ONNX</string>
     <string name="ai_model">AI Model</string>
+    <string name="model_not_found">Model not found. Download through model downloader.</string>
     <string name="download_models">Download Models</string>
     <string name="download">Download</string>
     <string name="update_channel_name">Update Channel</string>

@@ -23,6 +23,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -79,6 +82,22 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         OplusMenuPreference mAiModePreference = findPreference("ai_mode");
         mAiModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             mModelPreference.setVisible(newValue.equals("1"));
+            return true;
+        });
+
+        mModelPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            String fileName = switch (Integer.parseInt((String) newValue)) {
+                case 1 -> "u2net_human_seg.onnx";
+                case 2 -> "u2netp.onnx";
+                case 3 -> "isnet_anime.onnx";
+                default -> "u2net.onnx";
+            };
+            if (!new File(requireContext().getFilesDir(), fileName).exists()) {
+                Snackbar.make(requireContext(),
+                        requireView(),
+                        getString(R.string.model_not_found),
+                        Snackbar.LENGTH_LONG).show();
+            }
             return true;
         });
 
