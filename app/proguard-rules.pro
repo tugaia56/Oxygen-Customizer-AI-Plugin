@@ -19,6 +19,12 @@
     public static ** requireNonNull(...);
 }
 
+# Activity and Fragment names
+-keep class it.dhd.oxygencustomizer.aiplugin.ui.activities.**
+-keep class it.dhd.oxygencustomizer.aiplugin.ui.fragments.**
+-keep class it.dhd.oxygencustomizer.aiplugin.receivers.**
+-keepnames class it.dhd.oxygencustomizer.aiplugin.receivers.**
+
 # Strip debug log
 -assumenosideeffects class android.util.Log {
     public static int v(...);
