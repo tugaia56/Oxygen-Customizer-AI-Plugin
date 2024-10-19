@@ -1,3 +1,6 @@
+**2.1.1**  
+- Minus UI changes  
+  
 **2.1.0**  
 - Request file permissions on startup  
   

@@ -14,8 +14,8 @@ android {
         applicationId = "it.dhd.oxygencustomizer.aiplugin"
         minSdk = 31
         targetSdk = 34
-        versionCode = 7
-        versionName = "2.1.0"
+        versionCode = 8
+        versionName = "2.1.1"
         setProperty("archivesBaseName", "OxygenCustomizerAIPlugin.apk")
     }
 
