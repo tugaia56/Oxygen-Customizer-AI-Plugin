@@ -2,7 +2,7 @@
 <resources>
 
     <!-- UI -->
-    <color name="colorAccent">@android:color/system_accent1_300</color>
+    <color name="colorAccent">@android:color/system_accent3_600</color>
     <color name="colorAccentVariant">@android:color/system_accent3_600</color>
     <color name="seed">#00897B</color>
     <color name="md_theme_light_primary">#006B5F</color>
