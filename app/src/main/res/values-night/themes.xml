@@ -54,21 +54,21 @@
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundSoft</item>
         <item name="android:colorBackground">@color/colorBackgroundSoft</item>
-        <item name="preferenceBackgroundColor">#454545</item>
+        <item name="preferenceBackgroundColor">@*android:color/button_material_dark</item>
     </style>
 
     <style name="Theme.OxygenCustomizer.AIPlugin.DarkMedium" parent="Theme.OxygenCustomizer.AIPlugin">
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundMedium</item>
         <item name="android:colorBackground">@color/colorBackgroundMedium</item>
-        <item name="preferenceBackgroundColor">#2F2F2F</item>
+        <item name="preferenceBackgroundColor">@*android:color/button_material_dark</item>
     </style>
 
     <style name="Theme.OxygenCustomizer.AIPlugin.DarkHard" parent="Theme.OxygenCustomizer.AIPlugin">
         <!-- Background color. -->
         <item name="android:windowBackground">@color/colorBackgroundHard</item>
         <item name="android:colorBackground">@color/colorBackgroundHard</item>
-        <item name="preferenceBackgroundColor">#1A1A1A</item>
+        <item name="preferenceBackgroundColor">@*android:color/button_material_dark</item>
     </style>
 
 </resources>
